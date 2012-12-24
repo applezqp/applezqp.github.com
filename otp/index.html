@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>otp</title>
+</head>
+<style type="text/css">
+/*alipay webapp common*/
+html,body{
+    background: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+body {
+	font-family:\5FAE\8F6F\96C5\9ED1, Arial, sans-serif;
+	line-height:1.8;
+	font-size:12px;
+	background: #f6f6f6;
+	color: #000;
+	word-wrap: break-word;
+	-webkit-text-size-adjust: none;
+}
+.layout-flex {
+	display: -webkit-box;
+	-webkit-box-align: center;
+	-webkit-box-pack: center;
+}
+.otp-num {
+	height: 94px;
+	margin: 15px 15px 25px;
+	background-color: rgba(255,177,37,0);
+	border-color:rgba(255,177,37,0);
+	border-width: 7px 14px 24px 11px;
+	display: -webkit-box;
+	-webkit-box-sizing: border-box;
+	-webkit-border-image:url(img/num-bg.png) 7 14 24 11 stretch stretch;
+	-webkit-box-pack: justify;
+}
+
+.otp-num span {
+	display: -webkit-box;
+	width: 41px;
+	height: 63px;
+	margin-left: 3px;
+	background: url(img/num.png) no-repeat 0 0;
+	-webkit-background-size: 41px 630px;
+	-webkit-transition: background-position .5s ease-out;
+}
+.otp-num .num-0 { background-position: 0 0;}
+.otp-num .num-1 { background-position: 0 -63px;}
+.otp-num .num-2 { background-position: 0 -126px;}
+.otp-num .num-3 { background-position: 0 -189px;}
+.otp-num .num-4 { background-position: 0 -252px;}
+.otp-num .num-5 { background-position: 0 -315px;}
+.otp-num .num-6 { background-position: 0 -378px;}
+.otp-num .num-7 { background-position: 0 -441px;}
+.otp-num .num-8 { background-position: 0 -504px;}
+.otp-num .num-9 { background-position: 0 -567px;}
+
+.otp-adjust a{
+	width: 94px;
+	height: 92px;
+	margin: 0 auto;
+	font-size: 16px;
+	font-weight: 700;
+	color: #1d5285;
+	background: url(img/icon-count.png) no-repeat 8px 7px;
+	-webkit-background-size: 78px 77px;
+    -webkit-transition:-webkit-transform 0.5s ease;
+	text-decoration: none;
+}
+.otp-adjust a:hover{
+	-webkit-transform: scale(1.3);
+}
+.otp-adjust a time{ font-size: 32px;}
+
+</style>
+<body>
+<section>
+	<div class="otp-num"></div>
+	<div class="otp-adjust">
+		<a href="#" id="J-adjust" class="layout-flex"><time></time>s</a>
+	</div>
+</section>
+<script type="text/javascript" src="js/core.js"></script>
+<script type="text/javascript" src="js/enc-base64.js"></script>
+<script type="text/javascript" src="js/sha1.js"></script>
+<script type="text/javascript" src="js/hmac.js"></script>
+<script type="text/javascript" src="js/hotp.js"></script>
+<script type="text/javascript" src="js/zepto.js"></script>
+<script type="text/javascript">
+(function(){
+	var utils = { 
+		nowTime: function() {
+			return parseInt(new Date().getTime()/1000, 10);
+		},
+		guid: function() {
+			function S4(){return(((1+Math.random())*65536)|0).toString(16).substring(1)}
+			return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4()).toUpperCase();
+		},
+		coverTwo: function(target) {
+			var a = target.toString().split('');
+			if(a.length == 1){
+				a.unshift(0);
+				target = a.join('');
+			}
+			return target;
+		}
+	};
+
+	var otp = {
+		data: {
+			timeDiff: 0,
+			interval: 2,
+			seed: utils.guid()
+		},
+		otpNum: 0,
+		handle: null,	
+		updateOtp: function() {
+			var data = this.data,
+				counter = parseInt((utils.nowTime() + data.timeDiff)/data.interval, 10),
+				otpNum = CryptoJS.hotp(data.seed, counter, "dec6");
+			if(this.otpNum == otpNum) {
+				return false;
+			} else {
+				var wrap = $('.otp-num'), spans = wrap.find('span'), len = spans.size();
+				otpNum.split('').forEach(function(value, i){
+					if(len) {
+						spans.eq(i).attr('class', 'num-'+ value);
+					} else {
+						wrap.append('<span class="num-'+ value +'"></span>')
+					}
+				});
+				this.otpNum = otpNum;
+				return true;
+			}
+		},
+		countDown: function(num) {
+			var that = this,
+				time = $('#J-adjust time'),
+				num = this.data.interval;
+			that.handle && clearInterval(that.handle);
+			time.html(utils.coverTwo(num));
+			this.handle = setInterval(function(){
+				time.html(utils.coverTwo(--num));
+				if( num <= 0) {
+					that.handle && clearInterval(that.handle);
+					that.showOtp();
+				}
+			}, 1000);
+		},
+		showOtp: function() {
+			if(this.updateOtp()) {
+				this.countDown();
+			}
+		}
+	}
+	otp.showOtp();
+})();
+</script>
+</body>
+</html>
