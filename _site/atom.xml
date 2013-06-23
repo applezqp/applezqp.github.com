@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>applezqp</title>
+ <link href="http://applezqp.com/feed/atom.xml" rel="self"/>
+ <link href="http://applezqp.com/"/>
+ <updated>2013-06-23T21:31:29+08:00</updated>
+ <id>http://applezqp.com/</id>
+ <author>
+   <name>zhouqiuping</name>
+   <email>zhouqiuping@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Flexible Box Layout Module</title>
+   <link href="http://applezqp.com/blog/2013-04/Media-Queries.html"/>
+   <updated>2013-04-21T00:00:00+08:00</updated>
+   <id>http://applezqp.com/blog/2013-04/Media-Queries</id>
+   <content type="html">&lt;p&gt;响应式设计中最关键的一部分就是 Media Queries。整理下常用的 Media Queries，后期将持续维护。&lt;/p&gt;
+
+&lt;p&gt;首先，先列下最常见的几款设备参数：&lt;/p&gt;
+
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;设备&lt;/th&gt;
+            &lt;th&gt;分辨率&lt;/th&gt;
+            &lt;th&gt;像素比 (CSS pixel ratio)&lt;/th&gt;
+            &lt;th&gt;宽高比 (Aspect ratio)&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;iPhone 3&lt;/td&gt;
+            &lt;td&gt;480×320&lt;/td&gt;
+            &lt;td&gt;1&lt;/td&gt;
+            &lt;td&gt;3:2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;iPhone 4 &amp; 4S&lt;/td&gt;
+            &lt;td&gt;960×640&lt;/td&gt;
+            &lt;td&gt;2&lt;/td&gt;
+            &lt;td&gt;3:2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;iPhone 5&lt;/td&gt;
+            &lt;td&gt;1136×640&lt;/td&gt;
+            &lt;td&gt;2&lt;/td&gt;
+            &lt;td&gt;71:40&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;iPad mini&lt;/td&gt;
+            &lt;td&gt;1024x768&lt;/td&gt;
+            &lt;td&gt;1&lt;/td&gt;
+            &lt;td&gt;4:3&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;iPad 1 &amp; 2 &amp; 3&lt;/td&gt;
+            &lt;td&gt;1024×768&lt;/td&gt;
+            &lt;td&gt;1&lt;/td&gt;
+            &lt;td&gt;4:3&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;iPad 4&lt;/td&gt;
+            &lt;td&gt;2048×1536&lt;/td&gt;
+            &lt;td&gt;2&lt;/td&gt;
+            &lt;td&gt;4:3&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Samsung Galaxy S I &amp; II&lt;/td&gt;
+            &lt;td&gt;800x480&lt;/td&gt;
+            &lt;td&gt;1.5&lt;/td&gt;
+            &lt;td&gt;3.5&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;Samsung Galaxy S III&lt;/td&gt;
+            &lt;td&gt;1280x720&lt;/td&gt;
+            &lt;td&gt;2&lt;/td&gt;
+            &lt;td&gt;16:9&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tobdy&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;详细信息可以访问&lt;a href=&quot;http://en.wikipedia.org/wiki/List_of_displays_by_pixel_density&quot;&gt;维基百科&lt;/a&gt;，维基百科上 iPad 3 和 iPad 4 参数相同，个人感觉有误。&lt;/p&gt;
+
+&lt;p&gt;此外，Android 设备过多，本人也了解较少，以下按 dpi 为维度进行区分：&lt;/p&gt;
+
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;DPI&lt;/th&gt;
+            &lt;th&gt;分辨率&lt;/th&gt;
+            &lt;th&gt;像素比 (CSS pixel ratio)&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;xhdpi&lt;/td&gt;
+            &lt;td&gt;960x640&lt;/td&gt;
+            &lt;td&gt;2&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;hdpi&lt;/td&gt;
+            &lt;td&gt;800x480&lt;/td&gt;
+            &lt;td&gt;1.5&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;mdpi&lt;/td&gt;
+            &lt;td&gt;480x320&lt;/td&gt;
+            &lt;td&gt;1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;ldpi&lt;/td&gt;
+            &lt;td&gt;320x240&lt;/td&gt;
+            &lt;td&gt;0.75&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;大概的占比可参考&lt;a href=&quot;http://isux.tencent.com/%E7%A7%BB%E5%8A%A8%E7%BB%88%E7%AB%AF%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87%E7%9F%A5%E8%AF%86.html&quot;&gt;移动终端开发必备知识&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;回归正题，根据上面的参数可以设置断点，列出常用的 Media Queries：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/* Smartphones */
+@media only screen
+and (min-width : 320px)
+and (max-width : 480px) {
+
+}
+
+/* device pixel ratio 可以根据不同的像素比加载不同质量的图片 */
+@media only screen and (-webkit-min-device-pixel-ratio: 2), 
+only screen and (min-device-pixel-ratio: 2) {
+
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
+
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio : 1),
+only screen and (min-device-pixel-ratio: 1) {
+
+}
+
+
+/* iPads */
+@media only screen and (device-width: 768px){
+
+}
+/* iPads (landscape) */
+@media only screen
+and (device-width: 768px)
+and (orientation: landscape) {
+
+}
+/* iPads (portrait) */
+@media only screen
+and (device-width: 768px)
+and (orientation: portrait) {
+
+}
+
+/* iPhone 4 */
+@media only screen 
+and (device-width: 320px) 
+and (-webkit-device-pixel-ratio: 2){
+
+}
+
+/* iPhone 4 (Landscape) */
+@media only screen 
+and (device-width: 320px) 
+and (-webkit-device-pixel-ratio: 2)
+and (orientation : Landscape) {
+
+}
+
+/* iPhone 4 (Portrait) */
+@media only screen 
+and (device-width: 320px) 
+and (-webkit-device-pixel-ratio: 2)
+and (orientation : portrait) {
+
+}
+
+/* iPhone 5 */
+@media only screen and (device-aspect-ratio: 40/71) {
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;iPad 和 iPhone 发生翻转的时候，设备的宽度不会发生变化，因此不能通过 &lt;code&gt;device-width&lt;/code&gt; 判断设备的方向，而是通过 &lt;code&gt;orientation&lt;/code&gt; 判断的。&lt;/p&gt;
+
+&lt;p&gt;当然以上不是最全的，可以根据各自的需求组合出各种写法，欢迎继续补充(&lt;em&gt;^__^&lt;/em&gt;)&lt;/p&gt;
+
+&lt;h2&gt;参考阅读&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;依然是MDN：&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/CSS/Media_queries&quot;&gt;CSS media queries&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;严重推荐，利于理解各种基本概念：&lt;a href=&quot;http://www.quirksmode.org/mobile/viewports.html&quot;&gt;A tale of two viewports — part one&lt;/a&gt; &amp;amp; &lt;a href=&quot;http://www.quirksmode.org/mobile/viewports2.html&quot;&gt;A tale of two viewports — part two&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Media Queries</title>
+   <link href="http://applezqp.com/blog/2013-04/Flexible-Box-Layout-Module.html"/>
+   <updated>2013-04-20T00:00:00+08:00</updated>
+   <id>http://applezqp.com/blog/2013-04/Flexible-Box-Layout-Module</id>
+   <content type="html">&lt;h2&gt;困惑&lt;/h2&gt;
+
+&lt;p&gt;刚开始使用 Flexbox 布局，或许会有不少困惑。Google 一下，会发现即有 &lt;code&gt;display: box;&lt;/code&gt; 也有 &lt;code&gt;display: flex;&lt;/code&gt;，属性也是有 &lt;code&gt;box-{*}&lt;/code&gt; 和 &lt;code&gt;flex-{*}&lt;/code&gt; 两套。&lt;/p&gt;
+
+&lt;p&gt;到底是 &lt;code&gt;box&lt;/code&gt; 还是 &lt;code&gt;flex&lt;/code&gt; 呢？终其原因，Flexbox 还未正式发布，从 2009 年到目前已经经历了多个版本，其中命名发生了较大的变化。&lt;/p&gt;
+
+&lt;p&gt;引用 &lt;a href=&quot;http://weblog.bocoup.com/dive-into-flexbox/&quot;&gt;Dive into Flexbox&lt;/a&gt; ：&lt;/p&gt;
+
+&lt;blockquote&gt;&lt;p&gt;Flexbox Specification Timeline:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;July 2009 Working Draft (display: box;)&lt;/li&gt;
+&lt;li&gt;March 2011 Working Draft (display: flexbox;)&lt;/li&gt;
+&lt;li&gt;November 2011 Working Draft (display: flexbox;)&lt;/li&gt;
+&lt;li&gt;March 2012 Working Draft (display: flexbox;)&lt;/li&gt;
+&lt;li&gt;June 2012 Working Draft (display: flex;)&lt;/li&gt;
+&lt;li&gt;September 2012 Candidate Recommendation (display: flex;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;虽然最新一版已经到达 CR 版本，但很多浏览器并不支持，目前支持比较广泛的是 2009 年的版本，具体的兼容情况可参考 &lt;a href=&quot;http://caniuse.com/flexbox&quot;&gt;caniuse&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;h2&gt;新老对比&lt;/h2&gt;
+
+&lt;p&gt;2009年版和2012年版的做个对比：&lt;/p&gt;
+
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;2009版&lt;/th&gt;
+            &lt;th&gt;2012版&lt;/th&gt;
+            &lt;th&gt;说明&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td&gt;display: box&lt;/td&gt;
+            &lt;td&gt;display: flex&lt;/td&gt;
+            &lt;td&gt;flexbox 布局&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;box-lines&lt;/td&gt;
+            &lt;td&gt;flex-wrap&lt;/td&gt;
+            &lt;td&gt;flex items 是否换行&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;box-orient&lt;/td&gt;
+            &lt;td&gt;flex-direction&lt;/td&gt;
+            &lt;td&gt;flex items 的排列方向&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;box-pack&lt;/td&gt;
+            &lt;td&gt;justify-content / align-self&lt;/td&gt;
+            &lt;td&gt;水平方向的剩余空间分配&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;box-align&lt;/td&gt;
+            &lt;td&gt;justify-content / align-self&lt;/td&gt;
+            &lt;td&gt;竖直方向的剩余空间分配&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;box-direction&lt;/td&gt;
+            &lt;td&gt;order&lt;/td&gt;
+            &lt;td&gt;flex items 的排列序列&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;box-flex&lt;/td&gt;
+            &lt;td&gt;flex&lt;/td&gt;
+            &lt;td&gt;flex item 的大小&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+
+&lt;p&gt;说明：
+box-pack 和 box-align 都对应 justify-content / align-self。因为 justify-content / align-self 和水平、竖直没有直接关系，主要和 main axis 、cross axis 有关，而排列的方向不同，main axis 和 cross axis也会发生变化，可以引用个图说明一下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://f.cloud.github.com/assets/170783/389616/37b92ee0-a715-11e2-8845-f3bbc57a3dae.png&quot; alt=&quot;css-flexbox_axis&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;*图出自&lt;a href=&quot;http://dev.opera.com/articles/view/flexbox-basics/&quot;&gt;flexbox-basics&lt;/a&gt;*&lt;/p&gt;
+
+&lt;p&gt;个人认为，新 Flexbox 除了命名的变化，在操作单位更加细化，例如：&lt;code&gt;order&lt;/code&gt;, &lt;code&gt;align-self&lt;/code&gt;, &lt;code&gt;flex-basis&lt;/code&gt;, &lt;code&gt;flex-grow&lt;/code&gt;, &lt;code&gt;flex-shrink&lt;/code&gt; 定义的对象都是 flex item ，这样能产生更多的变化。&lt;/p&gt;
+
+&lt;h2&gt;Demo&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://handyjs.github.io/lab/flexbox-old.html&quot;&gt;Old Flexbox&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://handyjs.github.io/lab/flexbox.html&quot;&gt;New Flexbox&lt;/a&gt; （New Flexbox 支持版本有限，该Demo仅支持Chrome，请在Chrome下运行）&lt;/p&gt;
+
+&lt;p&gt;PS：Demo 较简略，可自动动手多多尝试。&lt;/p&gt;
+
+&lt;h2&gt;参考阅读&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;新版 Flexbox ：&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/CSS/Tutorials/Using_CSS_flexible_boxes&quot;&gt;MDN&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;老版 Flexbox （示例较清晰）：&lt;a href=&quot;http://www.zhangxinxu.com/wordpress/2010/12/css-box-flex%E5%B1%9E%E6%80%A7%EF%BC%8C%E7%84%B6%E5%90%8E%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B%E7%AE%80%E4%BB%8B/&quot;&gt;CSS box-flex属性，然后弹性盒子模型简介&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;IE自成一套（泪崩）：&lt;a href=&quot;http://msdn.microsoft.com/en-us/library/ie/hh772069%28v=vs.85%29.aspx&quot;&gt;MSDN&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
+ 
+</feed>

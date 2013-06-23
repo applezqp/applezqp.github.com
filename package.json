@@ -1,0 +1,15 @@
+{
+  "name": "applezqp",
+  "version": "1.0.0",
+  "description": "applezqp blog theme",
+  "author": "zhouqiuping@gamil.com",
+  "bugs": {
+    "url": "https://github.com/applezqp/applezqp.github.com/issues"
+  },
+  "licenses": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-cssmin": "~0.6.1"
+  }
+}
+

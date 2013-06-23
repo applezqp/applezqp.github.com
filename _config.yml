@@ -1,0 +1,7 @@
+markdown: rdiscount
+permalink: /blog/:year-:month/:title.html
+url: http://applezqp.com
+name: applezqp
+paginate: 10
+pygments: true,
+exclude: [node_modules, lab, Gruntfile.js, package.json]
