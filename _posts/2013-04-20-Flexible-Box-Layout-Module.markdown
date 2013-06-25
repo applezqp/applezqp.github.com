@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Media Queries"
+title: "Flexible Box Layout Module"
 data: 2013-4-21 20:00:00
 categories: css
 ---

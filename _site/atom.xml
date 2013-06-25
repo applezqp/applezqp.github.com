@@ -4,7 +4,7 @@
  <title>applezqp</title>
  <link href="http://applezqp.com/feed/atom.xml" rel="self"/>
  <link href="http://applezqp.com/"/>
- <updated>2013-06-23T21:31:29+08:00</updated>
+ <updated>2013-06-25T13:24:55+08:00</updated>
  <id>http://applezqp.com/</id>
  <author>
    <name>zhouqiuping</name>
@@ -13,7 +13,7 @@
 
  
  <entry>
-   <title>Flexible Box Layout Module</title>
+   <title>Media Queries</title>
    <link href="http://applezqp.com/blog/2013-04/Media-Queries.html"/>
    <updated>2013-04-21T00:00:00+08:00</updated>
    <id>http://applezqp.com/blog/2013-04/Media-Queries</id>
@@ -209,7 +209,7 @@ and (orientation : portrait) {
  </entry>
  
  <entry>
-   <title>Media Queries</title>
+   <title>Flexible Box Layout Module</title>
    <link href="http://applezqp.com/blog/2013-04/Flexible-Box-Layout-Module.html"/>
    <updated>2013-04-20T00:00:00+08:00</updated>
    <id>http://applezqp.com/blog/2013-04/Flexible-Box-Layout-Module</id>

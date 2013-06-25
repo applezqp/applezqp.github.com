@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Flexible Box Layout Module"
+title: "Media Queries"
 data: 2013-4-21 20:00:00
 categories: css
 ---
@@ -109,7 +109,7 @@ categories: css
 
 回归正题，根据上面的参数可以设置断点，列出常用的 Media Queries：
 
-````
+```
 /* Smartphones */
 @media only screen
 and (min-width : 320px)
@@ -178,7 +178,7 @@ and (orientation : portrait) {
 @media only screen and (device-aspect-ratio: 40/71) {
 
 }
-````
+```
 
 iPad 和 iPhone 发生翻转的时候，设备的宽度不会发生变化，因此不能通过 `device-width` 判断设备的方向，而是通过 `orientation` 判断的。
 
