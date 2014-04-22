@@ -230,16 +230,15 @@ seajs.use(['jquery/jquery/1.10.1/jquery.js', 'handy/sweet/1.0.0/sweet'], functio
   // 查询
   var searchVal = '';
   $('#pod_search').keyup(function(event){
-    if(event.which != 13) return;
-
     var val = $(this).val();
     if(!val) {
+      searchVal = '';
       $('#result').html('');
       $('#pod_more').addClass('fn-hide').data('offset', '0');
       return;
-    } else if (searchVal == val) {
-      return;
     }
+
+    if(event.which != 13 || searchVal == val) return;
     searchVal = val;
     searchCocoapods(val);
   });
