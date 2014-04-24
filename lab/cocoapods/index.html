@@ -80,9 +80,9 @@
   text-decoration: underline;
 }
 .results li .description {
-  margin: 0 0 5px;
+  margin: 5px 0 10px;
   font-size: 13px;
-  color: #333;
+  color: #999;
 }
 .results li .update {
   margin: 0;
@@ -158,9 +158,9 @@
 <script type="text/javascript" src="http://static.alipayobjects.com/seajs/seajs/2.2.0/sea.js"></script>
 <script type="text/javascript">
 seajs.use(['jquery/jquery/1.10.1/jquery.js', 'handy/sweet/1.0.0/sweet'], function($, Sweet){
-  var ids = 20, cocoapods_url = 'http://search.cocoapods.org/api/v1/pods.flat.hash.json';
-  var status = 200;
-  function searchCocoapods(val) {
+  var cocoapods_url = 'http://search.cocoapods.org/api/v1/pods.flat.hash.json';
+  var ids = 20, status = 200;
+  function searchCocoapods(val, isMore) {
     var podMore = $('#pod_more'); 
     var offset = podMore.data('offset') || 0; 
     var platform = $('#pod_platform .selected').html();
@@ -173,7 +173,7 @@ seajs.use(['jquery/jquery/1.10.1/jquery.js', 'handy/sweet/1.0.0/sweet'], functio
       },
       dataType: 'json',
       success: function(data){
-        showResult(data);
+        showResult(data, isMore);
 
         if(data.length < ids) {
           podMore.addClass('fn-hide');
@@ -183,10 +183,11 @@ seajs.use(['jquery/jquery/1.10.1/jquery.js', 'handy/sweet/1.0.0/sweet'], functio
       }
     });
   }
-  function showResult(data) {
+
+  function showResult(data, isMore) {
     var resultList = $('#result');
     $('.container').css('padding-top', '20px');
-    if(!data.length) {
+    if(!data.length && !isMore) {
       resultList.html('<li class="noresult">Sorry. No pods found.</li>');
       return;
     }
@@ -211,9 +212,14 @@ seajs.use(['jquery/jquery/1.10.1/jquery.js', 'handy/sweet/1.0.0/sweet'], functio
     });
   }
   
+  function reset() {
+    $('#result').html('');
+    $('#pod_more').addClass('fn-hide').data('offset', '0');
+  }
+
   // 更多
   $('#pod_more').click(function(event){
-    searchCocoapods($('#pod_search').val());
+    searchCocoapods($('#pod_search').val(), true);
   });
   
   // 平台选择
@@ -222,8 +228,7 @@ seajs.use(['jquery/jquery/1.10.1/jquery.js', 'handy/sweet/1.0.0/sweet'], functio
     event.preventDefault();
     podPlatform.removeClass('selected');
     $(this).addClass('selected');
-    $('#result').html('');
-    $('#pod_more').addClass('fn-hide').data('offset', '0');
+    reset();
     searchCocoapods($('#pod_search').val());
   });
   
@@ -233,14 +238,12 @@ seajs.use(['jquery/jquery/1.10.1/jquery.js', 'handy/sweet/1.0.0/sweet'], functio
     var val = $(this).val();
     if(!val) {
       searchVal = '';
-      $('#result').html('');
-      $('#pod_more').addClass('fn-hide').data('offset', '0');
-      return;
+      reset();
+    } else if( event.which == 13 &&  searchVal != val) {
+      searchVal = val;
+      reset();
+      searchCocoapods(val);
     }
-
-    if(event.which != 13 || searchVal == val) return;
-    searchVal = val;
-    searchCocoapods(val);
   });
 });
 </script>
